@@ -1,1 +1,2 @@
-mx_get_char_index В якийх випадках повертати -2?
+mx_strtrim чому воно працює?
+char **mx_strsplit сложна

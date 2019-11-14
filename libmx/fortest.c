@@ -27,8 +27,11 @@ int main(void) {
     mx_del_strarr(&stringarr);    */
 
 
-    //const char str[10] = "qwerty";
-    //const char *p_str = "ytrewq";
-    const char c_str = 'a';
-    printf("%d\n", mx_get_char_index(&c_str, 'a'));
+    const char *haystack = "ert";
+//    const char *needle = "  q  ertwertyert       a  ";
+    //char *check = mx_strnew(mx_strlen(needle));
+    char **arr = mx_strsplit(haystack, ' ');
+    char delim = '\n';
+    mx_print_strarr(arr, &delim);
+    //printf("%s\n", mx_del_extra_spaces(needle));
 }
