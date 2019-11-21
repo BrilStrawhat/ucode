@@ -26,6 +26,7 @@ int main(void) {
     stringarr[4] = NULL;
     mx_del_strarr(&stringarr);    */
 
-    const char *file = "/home/bril/ucode/git/ucode/libmx/test_file";
-    printf("%s\n", mx_file_to_str(file));
+    char *arr[10] = { NULL };
+    if (arr[1] == NULL)
+        mx_printchar('1');
 }
