@@ -26,12 +26,6 @@ int main(void) {
     stringarr[4] = NULL;
     mx_del_strarr(&stringarr);    */
 
-
-    const char *haystack = "ert";
-//    const char *needle = "  q  ertwertyert       a  ";
-    //char *check = mx_strnew(mx_strlen(needle));
-    char **arr = mx_strsplit(haystack, ' ');
-    char delim = '\n';
-    mx_print_strarr(arr, &delim);
-    //printf("%s\n", mx_del_extra_spaces(needle));
+    const char *file = "/home/bril/ucode/git/ucode/libmx/test_file";
+    printf("%s\n", mx_file_to_str(file));
 }

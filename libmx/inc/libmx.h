@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <fcntl.h>
+#include <errno.h>
 
 void mx_print_unicode(wchar_t c);
 void mx_print_strarr(char **arr, const char *delim);
@@ -43,5 +45,8 @@ char *mx_del_extra_spaces(const char *str);
 char **mx_strsplit(const char *s, char c);
 char *mx_str_until_char_dup(const char *s1, char  c);
 char *mx_strtrim_char(const char *s1, char c);
+char *mx_itoa(int number);
+char *mx_file_to_str(const char *file);
+int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd);
 
 #endif
