@@ -8,7 +8,8 @@ int mx_get_substr_index(const char *str, const char *sub) {
     if (mx_strstr(str, sub) == NULL)
         return -1;
     while (str != mx_strstr(str, sub)) {
-        str++, i++;
+        str++;
+        i++;
     }
     return i; 
 }
