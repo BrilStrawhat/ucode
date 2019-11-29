@@ -51,5 +51,7 @@ int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd);
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 unsigned int mx_abs(int num);
 char *mx_strnreplace(char *dst, const char *src, int len);
+void *mx_memset(void *b, int c, size_t len);
+void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 #endif

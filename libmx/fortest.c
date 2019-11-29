@@ -26,8 +26,15 @@ int main(void) {
     stringarr[4] = NULL;
     mx_del_strarr(&stringarr);    */
 
-    char *str = "This is the test the really good the test";
-    char *sub = "the";
-    char *replace = "pok";
+    /*char *str = "mamamam";
+    char *sub = "ma";
+    char *replace = "REPLACE";
     printf("%s\n", mx_replace_substr(str, sub, replace));
+    printf("%s\n", str);*/
+
+    char dst[50] = "what ar\0e you doing, memset?";
+    char src[50] = "bla-bla-bla";
+    printf("%s\n", strncpy(dst, src, 8));
+    printf("%s\n", mx_strncpy(dst, src, 8));
+
 }
