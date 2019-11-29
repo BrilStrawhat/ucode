@@ -48,5 +48,8 @@ char *mx_strtrim_char(const char *s1, char c);
 char *mx_itoa(int number);
 char *mx_file_to_str(const char *file);
 int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd);
+char *mx_replace_substr(const char *str, const char *sub, const char *replace);
+unsigned int mx_abs(int num);
+char *mx_strnreplace(char *dst, const char *src, int len);
 
 #endif

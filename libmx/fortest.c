@@ -26,7 +26,8 @@ int main(void) {
     stringarr[4] = NULL;
     mx_del_strarr(&stringarr);    */
 
-    char *arr[10] = { NULL };
-    if (arr[1] == NULL)
-        mx_printchar('1');
+    char *str = "This is the test the really good the test";
+    char *sub = "the";
+    char *replace = "pok";
+    printf("%s\n", mx_replace_substr(str, sub, replace));
 }
