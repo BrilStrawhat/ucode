@@ -32,9 +32,14 @@ int main(void) {
     printf("%s\n", mx_replace_substr(str, sub, replace));
     printf("%s\n", str);*/
 
-    char dst[50] = "what ar\0e you doing, memset?";
-    char src[50] = "bla-bla-bla";
-    printf("%s\n", strncpy(dst, src, 8));
-    printf("%s\n", mx_strncpy(dst, src, 8));
+    /*char dst[50] = "what ar\0e you doing, memset?";*/
+    /*char src[50] = "bla-bla-bla";*/
+    /*printf("%s\n", strncpy(dst, src, 8));*/
+    /*printf("%s\n", mx_strncpy(dst, src, 8));*/
+    //bug^^
 
+    char *one = "asv";
+    char *two = "asd";
+    printf("%d\n", memcmp(one, two, 5));
+    //printf("%d\n", mx_memcmp(one, two, 5));
 }
