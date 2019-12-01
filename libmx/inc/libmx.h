@@ -9,6 +9,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <malloc/malloc.h>
 
 void mx_print_unicode(wchar_t c);
 void mx_print_strarr(char **arr, const char *delim);
@@ -51,10 +52,16 @@ int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd);
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 unsigned int mx_abs(int num);
 char *mx_strnreplace(char *dst, const char *src, int len);
+
 void *mx_memset(void *b, int c, size_t len);
 void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
 void *mx_memccpy(void *restrict dst, const void *restrict src,
                  int c, size_t n);
 int mx_memcmp(const void *s1, const void *s2, size_t n);
+void *mx_memchr(const void *s, int c, size_t n);
+void *mx_memrchr(const void *s, int c, size_t n);
+void *mx_memmem(const void *big, size_t big_len,
+                const void *little, size_t little_len);
+void *mx_memmove(void *dst, const void *src, size_t len);
 
 #endif

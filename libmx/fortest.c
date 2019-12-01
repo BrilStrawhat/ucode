@@ -38,8 +38,53 @@ int main(void) {
     /*printf("%s\n", mx_strncpy(dst, src, 8));*/
     //bug^^
 
-    char *one = "asv";
-    char *two = "asd";
-    printf("%d\n", memcmp(one, two, 5));
-    //printf("%d\n", mx_memcmp(one, two, 5));
+    /*char *one = "asvasfda";*/
+    /*char *two = "fdf";*/
+    /*printf("%s\n", memmem(one, 15, two, 3));*/
+    /*printf("%s\n", mx_memmem(one, 15, two, 3));*/
+    //wtf^^
+
+    /*char src[] = "asdf is check of memmove";*/
+    /*char dst[4] = "shit";*/
+    /*memmove(dst, src, 4);*/
+    /*printf("%s\n", dst);*/
+    /*printf("%s\n", (one, 15, two, 3));*/
+
+    /*char one[] = "asdf is check of memmove";*/
+    /*char mx_one[] = "asdf is check of memmove";*/
+    /*char two[] = "asdf is check of memmove";*/
+    /*//char two[4] = "shit";*/
+    /*printf("org:\n%s\n", one);*/
+    /*memcpy(one + 1, one, 5);*/
+    /*mx_memcpy(mx_one + 1, mx_one, 5);*/
+    /*printf("memcpy:\n%s\n", one);*/
+    /*printf("mx_memcpy:\n%s\n", mx_one);*/
+    /*memmove(one + 1, one, 5);*/
+    /*printf("memmove:\n%s\n", two);*/
+    //WTF^^
+    //rework bug^^
+    
+    /*char src[] = "asdf is check of memmove";*/
+    /*char mx_one[] = "asdf is check of memmove";*/
+    /*char *dst = malloc(16);*/
+    /*char *a_dst = "shitasdasdasdasdiiiiia";*/
+    /*printf("%zu\n", malloc_size(dst));*/
+    /*printf("%zu\n", sizeof(*dst));*/
+    /*mx_strcpy(dst, a_dst);*/
+    /*printf("%s\n", dst);*/
+    /*memmove(dst, src, 10);*/
+    /*printf("memmove:\n%s\n", dst);*/
+    //WTF^^
+    
+    
+    char src[] = "asdf is check of memmove";
+    char mx_src[] = "asdf is check of memmove";
+    char dst[] = "dyw?";
+    char mx_dst[] = "dyw?";
+    printf("org:\n%s\n", src);
+    /*char dst[] = "qwert";*/
+    memmove(dst, src, 5);
+    mx_memmove(mx_dst, mx_src, 5);
+    printf("memmove:\n%s\n", dst);
+    printf("mx_memmove:\n%s\n", mx_dst);
 }
