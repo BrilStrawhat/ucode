@@ -76,21 +76,16 @@ int main(void) {
     /*printf("memmove:\n%s\n", dst);*/
     //WTF^^
     
-    
-    /*char src[] = "asdf is check of memmove";*/
-    /*char mx_src[] = "asdf is check of memmove";*/
-    /*char dst[] = "dyw?";*/
-    /*char mx_dst[] = "dyw?";*/
-    /*printf("org:\n%s\n", src);*/
-    /*[>char dst[] = "qwert";<]*/
-    /*memmove(dst, src, 5);*/
-    /*mx_memmove(mx_dst, mx_src, 5);*/
-    /*printf("memmove:\n%s\n", dst);*/
-    /*printf("mx_memmove:\n%s\n", mx_dst);*/
-
-    char *src;
-    src = malloc(100);
-    src = "asdf is check of memmove";
-    char *dst = "dyw?";
-    printf("%s\n", mx_strcat_until_char(src, dst, 'w'));
+    int fd = open("test_file", O_RDONLY);
+    size_t buf_size = 20;
+    // int read_result;
+    // static char *fd_arr[255] = { NULL };
+    // fd_arr[fd - 3] = mx_strnew(buf_size);
+    // read_result = read(fd, fd_arr[fd - 3], buf_size);
+    // printf("\n%d\n", read_result);
+    // printf("chec:  %s\n", fd_arr[fd - 3]);
+    char *lineptr = NULL;
+    int res;
+    res = mx_read_line(&lineptr, buf_size, '\n', fd);
+    printf("res = %d\n lineptr = %s\n", res, lineptr);
 }
