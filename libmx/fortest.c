@@ -76,16 +76,26 @@ int main(void) {
     /*printf("memmove:\n%s\n", dst);*/
     //WTF^^
     
-    int fd = open("test_file", O_RDONLY);
-    size_t buf_size = 20;
+    int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
+    size_t buf_size = 5;
     // int read_result;
-    // static char *fd_arr[255] = { NULL };
+    // char *fd_arr[255] = { NULL };
+    // char *dst = NULL;
+    // printf("errno: %s\n", strerror(errno));
     // fd_arr[fd - 3] = mx_strnew(buf_size);
     // read_result = read(fd, fd_arr[fd - 3], buf_size);
-    // printf("\n%d\n", read_result);
-    // printf("chec:  %s\n", fd_arr[fd - 3]);
+    // printf("errno: %s\n", strerror(errno));
+    // printf("main_get_index: %d\n", mx_get_char_index(fd_arr[fd - 3], '\n'));
+    // printf("main: %s\n", mx_strjoin_until_char(dst, fd_arr[fd - 3], 'd'));
+
     char *lineptr = NULL;
-    int res;
+    int res = 0;
     res = mx_read_line(&lineptr, buf_size, '\n', fd);
-    printf("res = %d\n lineptr = %s\n", res, lineptr);
+    // printf("res = %d\nlineptr = %s\n", res, lineptr);
+    res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // printf("res = %d\nlineptr = %s\n", res, lineptr);
+    // res = mx_read_line(&lineptr, buf_size, '\n', fd);
+    // printf("res = %d\nlineptr = %s\n", res, lineptr);
+    // res = mx_read_line(&lineptr, buf_size, '\n', fd);
+    printf("MAIN:res = %d\nlineptr = %s\n", res, lineptr);
 }
