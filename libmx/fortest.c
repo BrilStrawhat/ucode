@@ -79,14 +79,16 @@ int main(void) {
     int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
     size_t buf_size = 5;
     // int read_result;
-    // char *fd_arr[255] = { NULL };
+    // char *fd_arr[258] = { NULL };
+    // char shift;
     // char *dst = NULL;
+    // fd_arr[fd] = mx_strnew(buf_size * 3);
+    // read_result = read(fd, fd_arr[fd], buf_size);
+    // read_result = read(fd, &shift, 1);
+    // read_result = read(fd, &fd_arr[fd][buf_size], buf_size);
     // printf("errno: %s\n", strerror(errno));
-    // fd_arr[fd - 3] = mx_strnew(buf_size);
-    // read_result = read(fd, fd_arr[fd - 3], buf_size);
-    // printf("errno: %s\n", strerror(errno));
-    // printf("main_get_index: %d\n", mx_get_char_index(fd_arr[fd - 3], '\n'));
-    // printf("main: %s\n", mx_strjoin_until_char(dst, fd_arr[fd - 3], 'd'));
+    // printf("main_get_index: %d\n", mx_get_char_index(fd_arr[fd], '\n'));
+    // printf("main: %s\n", mx_strjoin_until_char(dst, fd_arr[fd], 'd'));
 
     char *lineptr = NULL;
     int res = 0;
