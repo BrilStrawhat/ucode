@@ -23,10 +23,12 @@ int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd) {
             return -2;
         char_index = mx_get_char_index(fd_arr[0][fd], delim);
         if (char_index == 0 && fd_arr[0][fd][0] != '\0') {
-            printf("i = %d shift\n", i);
             // Write to shift array? If yes, will delete next line.
-            fd_arr[0][fd]++;
+            // fd_arr[0][fd]++;
+            mx_memmove(&fd_arr[0][fd][0], &fd_arr[0][fd][1],
+                       mx_strlen(fd_arr[0][fd]) * 2 - 1);
             read(fd, &shift, 1);
+            printf("i = %d shift fd_arr[0]= %s\n", i, fd_arr[0][fd]);
             return 0;
         }
         *lineptr = mx_strjoin_until_char(*lineptr, fd_arr[0][fd], delim);

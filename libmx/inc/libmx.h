@@ -65,5 +65,7 @@ void *mx_memmove(void *dst, const void *src, size_t len);
 char *mx_strcat_until_char(char *s1, const char *s2, char delim);
 char *mx_strjoin_until_char(const char *s1, const char *s2, char delim);
 char *mx_strjoin(const char *s1, const char *s2);
+void mx_iarr_rotate(int *arr, int size, int shift);
+void mx_carr_rotate(char *arr, int size, int shift);
 
 #endif
