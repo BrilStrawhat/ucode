@@ -76,31 +76,31 @@ int main(void) {
     /*printf("memmove:\n%s\n", dst);*/
     //WTF^^
     
-    int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
-    size_t buf_size = 5;
-    // int read_result;
-    // char *fd_arr[258] = { NULL };
-    // // char shift;
-    // // char *dst = NULL;
-    // fd_arr[fd] = mx_strnew(buf_size);
-    // read_result = read(fd, fd_arr[fd], buf_size);
-    // // read_result = read(fd, &shift, 1);
-    // // read_result = read(fd, &fd_arr[fd][buf_size], buf_size);
-    // printf("errno: %s\n", strerror(errno));
-    // printf("read_result = %d\n", read_result);
-    // printf("%s\n", fd_arr[fd]);
-    // printf("main_get_index: %d\n", mx_get_char_index(fd_arr[fd], '\n'));
-    // printf("main: %s\n", mx_strjoin_until_char(dst, fd_arr[fd], 'd'));
+    // int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
+    // size_t buf_size = 5;
+    // // int read_result;
+    // // char *fd_arr[258] = { NULL };
+    // // // char shift;
+    // // // char *dst = NULL;
+    // // fd_arr[fd] = mx_strnew(buf_size);
+    // // read_result = read(fd, fd_arr[fd], buf_size);
+    // // // read_result = read(fd, &shift, 1);
+    // // // read_result = read(fd, &fd_arr[fd][buf_size], buf_size);
+    // // printf("errno: %s\n", strerror(errno));
+    // // printf("read_result = %d\n", read_result);
+    // // printf("%s\n", fd_arr[fd]);
+    // // printf("main_get_index: %d\n", mx_get_char_index(fd_arr[fd], '\n'));
+    // // printf("main: %s\n", mx_strjoin_until_char(dst, fd_arr[fd], 'd'));
 
-    char *lineptr = NULL;
-    int res = 0;
-    res = mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, 10, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    printf("MAIN:res = %d\nlineptr = %s strlen = %d\n",
-           res, lineptr, mx_strlen(lineptr));
+    // char *lineptr = NULL;
+    // int res = 0;
+    // res = mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, 10, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // printf("MAIN:res = %d\nlineptr = %s strlen = %d\n",
+           // res, lineptr, mx_strlen(lineptr));
 
     // char src[] = "How you works, realloc?Is strinaasdgf";
     // mx_strcat(str, src);
@@ -108,23 +108,26 @@ int main(void) {
     // str = realloc(str, 8);
     // strncat(str, src, 8);
 
-    // char *str1 = "1 node";
-    // char *str2 = "2 node";
-    // char *str3 = "3 node";
-    // char *str4 = "check";
-    // t_list *first = mx_create_node(str1);
-    // t_list *second = mx_create_node(str2);
-    // // t_list *third = mx_create_node(str3);
-    // t_list *node = malloc(sizeof(t_list));;
+    char *str1 = "1 node";
+    int i = 0;
+    t_list *first = mx_create_node(str1);
     
-    // first->next = second;
-    // // printf("q%s\n", second->data);
-    // mx_push_front(&first, str4);
-    // mx_push_back(&first, str3);
-    // for (node->next = first; node->next != NULL;) {
-        // printf("%s\n", node->data);
-        // node = node->next;
-        // if (node->next == NULL)
-            // printf("%s\n", node->data);
-    // }
+    mx_push_front(&first, "1");
+    mx_push_front(&first, "2");
+    mx_push_front(&first, "3");
+    mx_push_back(&first, "4");
+    for (t_list *node = first; node != NULL; i++) {
+        printf("%d - %s\n", i, node->data);
+        node  = node->next;
+    }
+    printf("%d\n", mx_list_size(first));
+    // char *str = mx_strnew(15);
+    // mx_realloc(str, 10);
+    // char *str1 = malloc(1);
+    // char *str17 = malloc(17);
+
+    // printf("%lu\n", malloc_size(str1));
+    // printf("%lu\n", malloc_size(str17));
+
+    
 }

@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static int fuck_auditor(char **fd_arr, int fd,
-                        size_t buf_size, long *read_result)
+                        size_t buf_size, long *read_result) //rename
 {
         if (*fd_arr == NULL)
             *fd_arr = mx_strnew(buf_size);
@@ -13,7 +13,7 @@ static int fuck_auditor(char **fd_arr, int fd,
             mx_strdel(fd_arr);
             return -2;
         }
-        return *read_result;;
+        return *read_result;
 
 }
 

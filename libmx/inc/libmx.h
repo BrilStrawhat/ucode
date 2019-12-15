@@ -9,6 +9,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <malloc/malloc.h>
 
 typedef struct s_list {
     void *data;
@@ -77,5 +78,8 @@ void *mx_realloc(void *ptr, size_t size);
 t_list *mx_create_node(void *data);
 void mx_push_front(t_list **list, void *data);
 void mx_push_back(t_list **list, void *data);
+void mx_pop_front(t_list **head);
+void mx_pop_back(t_list **head);
+int mx_list_size(t_list *list);
 
 #endif

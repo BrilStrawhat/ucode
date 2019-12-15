@@ -1,16 +1,17 @@
-#include "libmx.h"
+typedef struct s_list {
+    void *data;
+    struct s_list *next;
+}   t_list;
+
+t_list *mx_create_node(void *data);
+void mx_push_front(t_list **list, void *data);
+void mx_push_back(t_list **list, void *data);
 
 int main(void) {
-    char *str = "This is the test   the really good the test";
-    char *sub = "the";
-    //char *rap_sub = "yo yo yo";
-    char *test = mx_strnew(mx_strlen(str) - 1);
-    int i_sub;
+    t_list *node = mx_create_node("1");
 
-    mx_strcpy(test, str);
-    i_sub = mx_get_substr_index(str, sub);
-    i_sub = mx_get_substr_index(str + i_sub, sub);
-    mx_strnreplace(test + i_sub, sub, mx_strlen(sub));
-    printf("%d\n", i_sub);
-    printf("%s\n", test);
+    mx_push_front(&node, "2");
+    mx_push_front(&node, "3");
+    mx_push_front(&node, "4");
+    mx_push_back(&node, "2");
 }
