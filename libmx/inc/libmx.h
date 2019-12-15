@@ -10,6 +10,11 @@
 #include <fcntl.h>
 #include <errno.h>
 
+typedef struct s_list {
+    void *data;
+    struct s_list *next;
+}   t_list;
+
 void mx_print_unicode(wchar_t c);
 void mx_print_strarr(char **arr, const char *delim);
 int mx_strlen(const char *s);
@@ -66,6 +71,11 @@ char *mx_strcat_until_char(char *s1, const char *s2, char delim);
 char *mx_strjoin_until_char(const char *s1, const char *s2, char delim);
 char *mx_strjoin(const char *s1, const char *s2);
 void mx_iarr_rotate(int *arr, int size, int shift);
-void mx_carr_rotate(char *arr, int size, int shift);
+void mx_shift_str(char *str, int shift);
+void *mx_realloc(void *ptr, size_t size);
+//list functions:
+t_list *mx_create_node(void *data);
+void mx_push_front(t_list **list, void *data);
+void mx_push_back(t_list **list, void *data);
 
 #endif
