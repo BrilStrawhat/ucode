@@ -13,7 +13,7 @@ char **mx_strsplit(const char *s, char c) {
     for (int i = 0, j = 0; s[i] != '\0'; i++) {
         if (s[i] == c && s[i + 1] != c 
             && s[i] != '\0' && s[i + 1] != '\0') {
-            result[j] = mx_str_until_char_dup(s + i + 1, c);
+            result[j] = mx_strdup_until_char(s + i + 1, c);
             j++;
         }
     }

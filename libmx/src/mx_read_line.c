@@ -18,7 +18,6 @@ static int check_and_read(char **fd_arr, int fd,
             return -2;
         }
         return *read_result;
-
 }
 
 int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
@@ -26,6 +25,8 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
     long read_result;
     long result = 0;
 
+    if (lineptr != NULL)
+        mx_strdel(lineptr);
     while (1) {
         if (check_and_read(&fd_arr[fd], fd, buf_size, &read_result) == -2)
             return -2;
