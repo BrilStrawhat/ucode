@@ -20,13 +20,7 @@ static int check_and_read(char **fd_arr, int fd,
         return *read_result;
 }
 
-int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
-    static char *fd_arr[256] = { NULL };
-    long read_result;
-    long result = 0;
-
-    if (lineptr != NULL)
-        mx_strdel(lineptr);
+static void main_jobs(int *result, **fd_arr, delim) {
     while (1) {
         if (check_and_read(&fd_arr[fd], fd, buf_size, &read_result) == -2)
             return -2;
@@ -34,6 +28,8 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
         if (mx_get_char_index(fd_arr[fd], delim) != -1) {
             result += mx_get_char_index(fd_arr[fd], delim);
             mx_shift_str(fd_arr[fd], mx_get_char_index(fd_arr[fd], delim) + 1);
+            if (fd_arr[fd][0] == '\0')
+                mx_strdel(&fd_arr[fd]);
             return result;
         }
         if (read_result == 0) {
@@ -43,4 +39,31 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
         result += mx_strlen(fd_arr[fd]);
         mx_strdel(&fd_arr[fd]);
     }
+}
+
+int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
+    static char *fd_arr[256] = { NULL };
+    long read_result;
+    int result = 0;
+
+    if (lineptr != NULL)
+        mx_strdel(lineptr);
+    // while (1) {
+        // if (check_and_read(&fd_arr[fd], fd, buf_size, &read_result) == -2)
+            // return -2;
+        // *lineptr = mx_strjoin_until_char(lineptr, fd_arr[fd], delim);
+        // if (mx_get_char_index(fd_arr[fd], delim) != -1) {
+            // result += mx_get_char_index(fd_arr[fd], delim);
+            // mx_shift_str(fd_arr[fd], mx_get_char_index(fd_arr[fd], delim) + 1);
+            // if (fd_arr[fd][0] == '\0')
+                // mx_strdel(&fd_arr[fd]);
+            // return result;
+        // }
+        // if (read_result == 0) {
+            // mx_strdel(&fd_arr[fd]);
+            // return (result == 0) ? -1 : result;
+        // }
+        // result += mx_strlen(fd_arr[fd]);
+        // mx_strdel(&fd_arr[fd]);
+    // }
 }
