@@ -9,7 +9,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <malloc/malloc.h>
+// #include <malloc/malloc.h>
 
 typedef struct s_list {
     void *data;
@@ -49,7 +49,7 @@ bool mx_isspace(int c);
 char *mx_strtrim(const char *str);
 char *mx_del_extra_spaces(const char *str);
 char **mx_strsplit(const char *s, char c);
-char *mx_str_until_char_dup(const char *s1, char  c);
+char *mx_strdup_until_char(const char *s1, char  delim);
 char *mx_strtrim_char(const char *s1, char c);
 char *mx_itoa(int number);
 char *mx_file_to_str(const char *file);
@@ -74,6 +74,7 @@ char *mx_strjoin(const char *s1, const char *s2);
 void mx_iarr_rotate(int *arr, int size, int shift);
 void mx_shift_str(char *str, int shift);
 void *mx_realloc(void *ptr, size_t size);
+char *mx_strcpy_until_char(char *dst, const char *src, char delim);
 //list functions:
 t_list *mx_create_node(void *data);
 void mx_push_front(t_list **list, void *data);
