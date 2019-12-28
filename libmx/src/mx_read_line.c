@@ -3,6 +3,8 @@
 static int check_and_read(char **fd_arr, int fd,
                           size_t buf_size, long *read_result)
 {
+    if (fd < 0) 
+        return -2;
     if (*fd_arr == NULL) {
         *fd_arr = mx_strnew(buf_size);
     }

@@ -75,6 +75,9 @@ void mx_iarr_rotate(int *arr, int size, int shift);
 void mx_shift_str(char *str, int shift);
 void *mx_realloc(void *ptr, size_t size);
 char *mx_strcpy_until_char(char *dst, const char *src, char delim);
+void mx_print_error(const char *error);
+int mx_atoi(const char *str);
+bool mx_isdigit(int c);
 //list functions:
 t_list *mx_create_node(void *data);
 void mx_push_front(t_list **list, void *data);

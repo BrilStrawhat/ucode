@@ -97,17 +97,17 @@ int main(void) {
     int res = 0;
     printf("%d\n", fd);
     res = mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, 10, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, 10, '\n', fd);
     printf("MAIN:res = %d\nlineptr = %s\n",
            res, lineptr);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    // res += mx_read_line(&lineptr, 10, '\n', fd2);
-    // res += mx_read_line(&lineptr, buf_size, '\n', fd2);
-    printf("MAIN:res = %d\nlineptr = %s",
-           res, lineptr);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // // res += mx_read_line(&lineptr, 10, '\n', fd2);
+    // // res += mx_read_line(&lineptr, buf_size, '\n', fd2);
+    // printf("MAIN:res = %d\nlineptr = %s",
+           // res, lineptr);
     // mx_strdel(&lineptr);
 
     // char src[] = "How you works, realloc?Is strinaasdgf";
