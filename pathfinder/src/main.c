@@ -33,6 +33,12 @@ static void arr_malloc(char ***adj_matrix, int island_count) {
     for (int i = island_count; i >= 0; i--) {
         adj_matrix[i] = malloc(island_count * sizeof(char *));
     }
+    // for macOS
+    for (int i = island_count; i >= 0; i--) {
+        for (int j = island_count; j >= 0; j--) {
+            adj_matrix[i][j] = NULL;
+        }
+    }
 }
 
 static void is_uniq_island
@@ -45,12 +51,22 @@ static void is_uniq_island
             exit(-1);
         }
         if (mx_strcmp(island, adj_matrix[i][0]) == 0)
-                return;
+            return;
     }
     adj_matrix[i][0] = island;
     adj_matrix[0][i] = island;
 }
 
+// static void prepare_cell
+// (char *adj_matrix, char *island_i, char *island_j, char *distance) {
+    // char *path = "Path: ";
+    // char *route = "Route: ";
+    // char *arrow = " -> ";
+    // char *distance = "Distance: ";
+
+    // adj_matrix = mx_strjoin_del(adj_matrix, path);
+    // mx_strjoin(adj_matrix, path);
+    
 static void set_distance
 (char ***adj_matrix, char *island_i, char *island_j, char *distance) {
     int i;
@@ -126,6 +142,16 @@ static void fill_matrix(char ***adj_matrix, int island_count, int fd) {
     loop_nut_null(adj_matrix, island_count);
 }
 
+static void prepare_result_matrix
+(char ***adj_matrix, char ***result_matrix, int island_count) {
+    for (int i = 1; i <= island_count; i++) {
+        mx_printstr(adj_matrix[i][0]);
+        result_matrix[i][0] = mx_strdup(adj_matrix[i][0]);
+    }
+    for (int i = 1; i <= island_count; i++) 
+        result_matrix[0][i] = mx_strdup(adj_matrix[0][i]);
+}
+
 static bool is_direct_path(char *path) {
     for (int i = 0; path[i] != '\0'; i++) {
         if (mx_isdigit(path[i]) == false)
@@ -134,10 +160,49 @@ static bool is_direct_path(char *path) {
     return true;
 }
 
+static void copy_static_col_row
+(char ***adj_matrix, char ***result_matrix, int s, int island_count) {
+    for (int i = 1; i <= island_count; i++) {
+        if (adj_matrix[i][s] == NULL)
+            continue;
+        if (result_matrix[i][s] == NULL)
+            result_matrix[i][s] = mx_strdup(adj_matrix[i][s]);
+        else {
+            mx_strdel(&result_matrix[i][s]);
+            result_matrix[i][s] = mx_strdup(adj_matrix[i][s]);
+        }
+    }
+    for (int i = 1; i < island_count; i++) {
+        if (adj_matrix[s][i] == NULL)
+            continue;
+        if (result_matrix[s][i] == NULL)
+            result_matrix[s][i] = mx_strdup(adj_matrix[s][i]);
+        else {
+            mx_strdel(&result_matrix[i][s]);
+            result_matrix[s][i] = mx_strdup(adj_matrix[s][i]);
+        }
+    }
+} // ^^ not auditor
+
+static void add_distance(char *matrix_cell, char *distance) {
+    matrix_cell = mx_strjoin_del(matrix_cell " + ");
+    matrix_cell = mx_strjoin_del(matrix_cell, distance);
+}
+
 static void floyd_formula
-(char ***result_matrix, char ***adj_matrix, int ij[2], int step) {
-    if (adj_matrix[ij[0]][ij[1]] = NULL) {
-        // adj_matrix[ij[0]][ij[1]] = mx_strdup("Path: \nRoute: \nDistance: \n");
+(char ***adj_matrix, char ***result_matrix, int ij[2], int s) {
+    int i = ij[0];
+    int j = ij[1];
+
+    if (adj_matrix[i][j] == NULL)
+        if (adj_matrix[i][s] != NULL && adj_matrix[s][j] != NULL) {
+            result_matrix[i][j] = mx_strjoin(result_matrix[i][j],
+                                             adj_matrix[s][0]);
+            result_matrix[i][j] = mx_strjoin_del(result_matrix[i][j], "\n");
+            if (is_direct_path(adj_matrix[s][j]) == true) {
+                result_matrix[i][j] = mx_strjoin_del(
+                result_matrix[i][j], adj_matrix[s][j]);
+                add_distance(
 
 
 }
@@ -146,8 +211,14 @@ static void floyd
 (char ***adj_matrix, char ***result_matrix, int island_count) {
     int step = 1;
     int ij[2] = {2, 3};
+    int current = 1;
 
-    while (step++ <= island_count) {
+    while (step[0]++ <= island_count) {
+        current = (current == 1) ? 0 : 1;
+        if (current == 1)
+            copy_static_col_row(adj_matrix, result_matrix, step, island_count);
+        else
+            copy_static_col_row(result_matrix, adj_matrix, step, island_count);
         for (int i = 1; i <= island_count; i++) {
             for (int j = 1; j <= island_count; j++) {
                 if (adj_matrix[i][j] != NULL)
@@ -155,7 +226,10 @@ static void floyd
                             continue;
                 ij[0] = i;
                 ij[1] = j;
-                floyd_formula(result_matrix, adj_matrix, ij, step);
+                if (current == 1)
+                    floyd_formula(adj_matrix, result_matrix, ij, step);
+                else
+                    floyd_formula(result_matrix, adj_matrix, ij, step);
             }
         }
     }
@@ -170,11 +244,12 @@ int main(int argc, char **argv) {
     char ***result_matrix = malloc((island_count + 1) * sizeof(char **)); // fill last COL and ROW '\0'
     // char *island_i;
     // char *island_j;
-
     arr_malloc(adj_matrix, island_count + 1);
     arr_malloc(result_matrix, island_count + 1);
     fill_matrix(adj_matrix, island_count, fd);
-    floyd(adj_matrix, result_matrix, island_count);
+    prepare_result_matrix(adj_matrix, result_matrix, island_count);
+    // floyd(adj_matrix, result_matrix, island_count);
+    copy_static_col_row(adj_matrix, result_matrix, 1, island_count);
     for (int i = 0; i <= island_count; i++) {
         for (int j = 0; j <= island_count; j++) {
             if (adj_matrix[i][j] == NULL) {
@@ -182,6 +257,17 @@ int main(int argc, char **argv) {
                 continue;
             }
             printf("|%s|", adj_matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    for (int i = 0; i <= island_count; i++) {
+        for (int j = 0; j <= island_count; j++) {
+            if (result_matrix[i][j] == NULL) {
+                printf("|-|");
+                continue;
+            }
+            printf("|%s|", result_matrix[i][j]);
         }
         printf("\n");
     }
