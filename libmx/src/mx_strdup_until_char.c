@@ -3,6 +3,8 @@
 char *mx_strdup_until_char(const char *s1, char  delim) {
     char *result;
     
+    if (s1 == NULL)
+        return NULL;
     if (mx_get_char_index(s1, delim) < 0)
         result = mx_strnew(mx_strlen(s1));
     else

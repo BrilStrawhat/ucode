@@ -10,10 +10,11 @@ char *mx_itoa(int number) {
         size++;
         costil = -1;
     }
-        result = mx_strnew(size);
+    result = mx_strnew(size);
     for (int i = size - 1; i >= 0; i--, number /= 10) {
         result[i] = number % 10 * costil + 48;
     }
-    result[0] = '-';
+    if (costil == -1)
+        result[0] = '-';
     return result;
 } 

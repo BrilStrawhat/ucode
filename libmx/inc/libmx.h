@@ -25,7 +25,7 @@ void mx_printint(int n);
 double mx_pow(double n, unsigned int pow);
 int mx_sqrt(int x);
 void mx_foreach(const int *arr, int size, void (*f)(int));
-int mx_strcmp(const char*s1, const char*s2);
+int mx_strcmp(const char *s1, const char *s2);
 int mx_binary_search(char** arr, int size, const char *s, int *count);
 int mx_bubble_sort(char **arr, int size);
 
@@ -57,6 +57,9 @@ int mx_read_line(char** lineptr, size_t buf_size, char delim, const int fd);
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 unsigned int mx_abs(int num);
 char *mx_strnreplace(char *dst, const char *src, int len);
+int mx_atoi(const char *str);
+bool mx_isdigit(int c);
+bool mx_isalpha(int c);
 
 void *mx_memset(void *b, int c, size_t len);
 void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
@@ -76,8 +79,6 @@ void mx_shift_str(char *str, int shift);
 void *mx_realloc(void *ptr, size_t size);
 char *mx_strcpy_until_char(char *dst, const char *src, char delim);
 void mx_print_error(const char *error);
-int mx_atoi(const char *str);
-bool mx_isdigit(int c);
 //list functions:
 t_list *mx_create_node(void *data);
 void mx_push_front(t_list **list, void *data);

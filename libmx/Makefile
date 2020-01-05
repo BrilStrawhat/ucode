@@ -63,6 +63,7 @@ src/mx_strtrim_char.c \
 src/mx_str_until_char_dup.c \
 src/mx_swap_char.c \
 src/mx_print_error.c \
+src/mx_isalpha.c \
 
 OBJ = \
 mx_abs.o \
@@ -129,6 +130,7 @@ mx_strtrim.o \
 mx_str_until_char_dup.o \
 mx_swap_char.o \
 mx_print_error.o \
+mx_isalpha.o \
 
 LIB_NAME = libmx.a
 
