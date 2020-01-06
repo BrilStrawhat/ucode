@@ -9,6 +9,20 @@ static void check_first_line(char *line) {
     }
 }
 
+static void print_matrix(char ***adj_matrix, int island_count) {
+    for (int i = 0; i <= island_count; i++) {
+        for (int j = 0; j <= island_count; j++) {
+            if (adj_matrix[i][j] == NULL) {
+                printf("|-|");
+                continue;
+            }
+            printf("|%s|", adj_matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 static int argv_argc_handler(int argc, char **argv, int *fd) {
     char *lineptr = NULL;
 
@@ -145,7 +159,6 @@ static void fill_matrix(char ***adj_matrix, int island_count, int fd) {
 static void prepare_result_matrix
 (char ***adj_matrix, char ***result_matrix, int island_count) {
     for (int i = 1; i <= island_count; i++) {
-        mx_printstr(adj_matrix[i][0]);
         result_matrix[i][0] = mx_strdup(adj_matrix[i][0]);
     }
     for (int i = 1; i <= island_count; i++) 
@@ -184,15 +197,16 @@ static void copy_static_col_row
     }
 } // ^^ not auditor
 
-static void add_distance(char *matrix_cell, char *distance) {
-    matrix_cell = mx_strjoin_del(matrix_cell " + ");
-    matrix_cell = mx_strjoin_del(matrix_cell, distance);
-}
+// static void add_distance(char *matrix_cell, char *distance) {
+    // matrix_cell = mx_strjoin_del(matrix_cell, " + ");
+    // matrix_cell = mx_strjoin_del(matrix_cell, distance);
+// }
 
 static void floyd_formula
 (char ***adj_matrix, char ***result_matrix, int ij[2], int s) {
     int i = ij[0];
     int j = ij[1];
+    int char_index;
 
     if (adj_matrix[i][j] == NULL)
         if (adj_matrix[i][s] != NULL && adj_matrix[s][j] != NULL) {
@@ -202,23 +216,39 @@ static void floyd_formula
             if (is_direct_path(adj_matrix[s][j]) == true) {
                 result_matrix[i][j] = mx_strjoin_del(
                 result_matrix[i][j], adj_matrix[s][j]);
-                add_distance(
-
-
+            }
+            else {
+                char_index = mx_get_char_index(adj_matrix[i][j], ',');
+                result_matrix[i][j] = mx_strjoin_del(result_matrix[i][j],
+                &adj_matrix[s][j][char_index + 1]);
+            }
+            if (is_direct_path(adj_matrix[i][s]) == true) {
+                result_matrix[i][j] = mx_strjoin_del(
+                result_matrix[i][j], adj_matrix[i][s]);
+            }
+            else {
+                char_index = mx_get_char_index(adj_matrix[i][j], ',');
+                result_matrix[i][j] = mx_strjoin_del(result_matrix[i][j],
+                &adj_matrix[i][s][char_index + 1]);
+            }
+        }
 }
 
 static void floyd
 (char ***adj_matrix, char ***result_matrix, int island_count) {
-    int step = 1;
+    int step = 0;
     int ij[2] = {2, 3};
-    int current = 1;
+    int current = 0;
 
-    while (step[0]++ <= island_count) {
+    while (step++ <= island_count) {
         current = (current == 1) ? 0 : 1;
+        printf("current = %d; step = %d\n", current, step);
         if (current == 1)
             copy_static_col_row(adj_matrix, result_matrix, step, island_count);
         else
             copy_static_col_row(result_matrix, adj_matrix, step, island_count);
+        print_matrix(adj_matrix, island_count);
+        print_matrix(result_matrix, island_count);
         for (int i = 1; i <= island_count; i++) {
             for (int j = 1; j <= island_count; j++) {
                 if (adj_matrix[i][j] != NULL)
@@ -232,6 +262,7 @@ static void floyd
                     floyd_formula(result_matrix, adj_matrix, ij, step);
             }
         }
+        break;
     }
 }
 
@@ -248,28 +279,9 @@ int main(int argc, char **argv) {
     arr_malloc(result_matrix, island_count + 1);
     fill_matrix(adj_matrix, island_count, fd);
     prepare_result_matrix(adj_matrix, result_matrix, island_count);
-    // floyd(adj_matrix, result_matrix, island_count);
-    copy_static_col_row(adj_matrix, result_matrix, 1, island_count);
-    for (int i = 0; i <= island_count; i++) {
-        for (int j = 0; j <= island_count; j++) {
-            if (adj_matrix[i][j] == NULL) {
-                printf("|-|");
-                continue;
-            }
-            printf("|%s|", adj_matrix[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-    for (int i = 0; i <= island_count; i++) {
-        for (int j = 0; j <= island_count; j++) {
-            if (result_matrix[i][j] == NULL) {
-                printf("|-|");
-                continue;
-            }
-            printf("|%s|", result_matrix[i][j]);
-        }
-        printf("\n");
-    }
+    floyd(adj_matrix, result_matrix, island_count);
+    print_matrix(adj_matrix, island_count);
+    print_matrix(result_matrix, island_count);
+    // copy_static_col_row(adj_matrix, result_matrix, 1, island_count);
     close(fd);
 }
