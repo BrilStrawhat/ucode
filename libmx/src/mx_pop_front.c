@@ -11,6 +11,5 @@ void mx_pop_front(t_list **head) {
         return;
     }
     *head = (*head)->next;
-    printf("wtf\n");
     free(temp);
 }

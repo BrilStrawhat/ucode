@@ -1,4 +1,5 @@
 #include "libmx.h"
+#include <stdio.h>
 
 int main(void) {
 /*    char *ch_arr[] = {
@@ -76,8 +77,8 @@ int main(void) {
     /*printf("memmove:\n%s\n", dst);*/
     //WTF^^
     
-    int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
-    // int fd2 = open("/Users/tyerofieie/ucode/libmx/test_file2", O_RDONLY);
+    // int fd = open("/home/bril/ucode/libmx/test_file", O_RDONLY);
+    int fd = open("/Users/tyerofieie/ucode/libmx/test_file2", O_RDONLY);
     size_t buf_size = 5;
     // // int read_result;
     // // char *fd_arr[258] = { NULL };
@@ -96,19 +97,21 @@ int main(void) {
     char *lineptr = NULL;
     int res = 0;
     printf("%d\n", fd);
-    res = mx_read_line(&lineptr, buf_size, '\n', fd);
+    res = mx_read_line(&lineptr, buf_size, 's', fd);
     // res += mx_read_line(&lineptr, buf_size, '\n', fd);
     // res += mx_read_line(&lineptr, buf_size, '\n', fd);
     // res += mx_read_line(&lineptr, 10, '\n', fd);
     printf("MAIN:res = %d\nlineptr = %s\n",
            res, lineptr);
-    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    // res += mx_read_line(&lineptr, buf_size, '\n', fd);
-    // // res += mx_read_line(&lineptr, 10, '\n', fd2);
-    // // res += mx_read_line(&lineptr, buf_size, '\n', fd2);
-    // printf("MAIN:res = %d\nlineptr = %s",
-           // res, lineptr);
-    // mx_strdel(&lineptr);
+    res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    printf("MAIN:res = %d\nlineptr = %s\n",
+           res, lineptr);
+    res += mx_read_line(&lineptr, buf_size, '\n', fd);
+    // res += mx_read_line(&lineptr, 10, '\n', fd2);
+    // res += mx_read_line(&lineptr, buf_size, '\n', fd2);
+    printf("MAIN:res = %d\nlineptr = %s",
+           res, lineptr);
+    mx_strdel(&lineptr);
 
     // char src[] = "How you works, realloc?Is strinaasdgf";
     // mx_strcat(str, src);
