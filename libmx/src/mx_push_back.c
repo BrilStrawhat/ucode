@@ -4,8 +4,10 @@ void mx_push_back(t_list **list, void *data) {
     t_list *result = mx_create_node(data);
     t_list *current = *list;
 
-    if (*list == NULL)
+    if (*list == NULL) {
         *list = result;
+        return;
+    }
     while (current->next != NULL) {
         current = current->next;
     }

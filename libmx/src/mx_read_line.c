@@ -12,10 +12,10 @@ static int check_and_read(char **fd_arr, int fd,
         return -2;
     if (**fd_arr == '\0') {
         *read_result = read(fd, *fd_arr, buf_size);
-    }
-    if (*read_result == -1) {
-        mx_strdel(fd_arr);
-        return -2;
+        if (*read_result == -1) {
+            mx_strdel(fd_arr);
+            return -2;
+        }
     }
     return *read_result;
 }
@@ -32,9 +32,15 @@ static void costil(char **lineptr) {
         mx_strdel(lineptr);
 }
 
+static int costil_2(char *fd_arr, char **lineptr, int result) {
+    mx_strdel(&fd_arr);
+    mx_strdel(lineptr);
+    return (result == 0) ? -1 : result;
+}
+
 int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
     static char *fd_arr[256] = { NULL };
-    long read_result;
+    long read_result = -1;
     int result = 0;
 
     costil(lineptr);
@@ -47,8 +53,7 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
             return result;
         }
         if (read_result == 0) {
-            mx_strdel(&fd_arr[fd]);
-            return (result == 0) ? -1 : result;
+            return costil_2(fd_arr[fd], lineptr, result);
         }
         result += mx_strlen(fd_arr[fd]);
         mx_strdel(&fd_arr[fd]);

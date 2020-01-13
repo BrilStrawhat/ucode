@@ -19,5 +19,6 @@ void mx_error_handler(t_error error, char *filename, char *text);
 void mx_set_arr_null(int size_row, int size_col, char *arr[size_row][size_col]);
 char *mx_strjoin_del(char *s1, const char *s2);
 char *mx_strdup_del(char *str);
+void mx_del_matrix(char ***matrix, int size);
 
 #endif
