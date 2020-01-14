@@ -10,22 +10,24 @@ static void free_t_unit_list(t_unit* head) {
     }
 }
 
-void mx_push_back(t_unit **list, char *isld, char *dist) {
-    t_unit *result = (t_unit*)malloc(sizeof(t_unit));
-    t_unit *current = *list;
+// void mx_push_back_t_unit
+// (t_unit **list, char *isld_i, char *isld_j char *dist) {
+    // t_unit *result = (t_unit*)malloc(sizeof(t_unit));
+    // t_unit *current = *list;
 
-    result->isld = isld; //mx_add_island;
-    result->dist = dist;
-    result->parl = parl;
-    if (*list == NULL) {
-        *list = result;
-        return;
-    }
-    while (current->parl != NULL) {
-        current = current->parl;
-    }
-    current->parl = result;
-}
+    // mx_add_island(result, isld_i);
+    // mx_add_island(result, isld_j);
+    // mx_add_distance(result, dist);
+    // result->parl = NULL;
+    // if (*list == NULL) {
+        // *list = result;
+        // return;
+    // }
+    // while (current->parl != NULL) {
+        // current = current->parl;
+    // }
+    // current->parl = result;
+// }
 
 void mx_unit_malloc(t_unit **matrix, int island_count) {
     for (int i = 0; i < island_count; i++)

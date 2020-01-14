@@ -28,6 +28,7 @@ void mx_check_if_valid_line(char *line, int line_number);
 // memory_function
 void mx_unit_malloc(t_unit **matrix, int island_count);
 void mx_unit_free(t_unit **matrix, int island_count);
+void mx_push_back_t_unit(t_unit **list, char *isld, char *dist);
 // fill_matrix functions
 void mx_loop_not_null(t_unit **adj_matrix, int island_count);
 int  mx_is_uniq_island
@@ -38,6 +39,7 @@ void mx_parse_line(t_unit **adj_matrix, char *line, int island_count);
 void mx_fill_matrix(t_unit **adj_matrix, int island_count, int fd);
 // print_function
 void mx_print_matrix(t_unit **adj_matrix, int msize);
+void mx_print_result(t_unit **result_matrix, int msize);
 
 // floyd_function
 int mx_count_dist(char *dist); 

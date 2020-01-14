@@ -48,7 +48,9 @@ void mx_parse_line(t_unit **adj_matrix, char *line, int island_count) {
     char *distance = mx_strdup_until_char(
     line + mx_strlen(island_i) + mx_strlen(island_i) + 2, '\0');
     int is_uniq[2] = { 0 };
+    // char *dist_plus = mx_strjoin(distance, " + ");
 
+    // free(distance);
     is_uniq[0] = mx_is_uniq_island(adj_matrix, island_i, island_count);
     is_uniq[1] = mx_is_uniq_island(adj_matrix, island_j, island_count);
     mx_set_distance(adj_matrix, island_i, island_j, distance);

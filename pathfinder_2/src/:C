@@ -8,43 +8,43 @@ void mx_prepare_result_matrix
         result_matrix[0][i].isld = mx_strdup(adj_matrix[0][i].isld);
 }
 
-// void mx_copy_static_col_row
-// (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
-    // for (int i = 0; i < msize; i++) {
-        // if (adj_matrix[i][s].isld != NULL) {
-            // free(result_matrix[i][s].isld);
-            // result_matrix[i][s].isld = mx_strdup(adj_matrix[i][s].isld);
-        // }
-        // if (adj_matrix[i][s].dist != NULL) {
-            // free(result_matrix[i][s].dist);
-            // result_matrix[i][s].dist = mx_strdup(adj_matrix[i][s].dist);
-        // }
-    // }
-    // for (int i = 0; i < msize; i++) {
-        // if (adj_matrix[s][i].isld != NULL) {
-            // free(result_matrix[s][i].isld);
-            // result_matrix[s][i].isld = mx_strdup(adj_matrix[s][i].isld);
-        // }
-        // if (adj_matrix[s][i].dist != NULL) {
-            // free(result_matrix[s][i].dist);
-            // result_matrix[s][i].dist = mx_strdup(adj_matrix[s][i].dist);
-        // }
-    // }
-// }
+void mx_copy_static_col_row
+(t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
+    for (int i = 0; i < msize; i++) {
+        if (adj_matrix[i][s].isld != NULL) {
+            free(result_matrix[i][s].isld);
+            result_matrix[i][s].isld = mx_strdup(adj_matrix[i][s].isld);
+        }
+        if (adj_matrix[i][s].dist != NULL) {
+            free(result_matrix[i][s].dist);
+            result_matrix[i][s].dist = mx_strdup(adj_matrix[i][s].dist);
+        }
+    }
+    for (int i = 0; i < msize; i++) {
+        if (adj_matrix[s][i].isld != NULL) {
+            free(result_matrix[s][i].isld);
+            result_matrix[s][i].isld = mx_strdup(adj_matrix[s][i].isld);
+        }
+        if (adj_matrix[s][i].dist != NULL) {
+            free(result_matrix[s][i].dist);
+            result_matrix[s][i].dist = mx_strdup(adj_matrix[s][i].dist);
+        }
+    }
+}
 
-// void mx_copy_col
-// (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
-    // for (int i = 0; i < msize; i++) {
-        // if (adj_matrix[i][s].isld != NULL) {
-            // free(result_matrix[i][s].isld);
-            // result_matrix[i][s].isld = mx_strdup(adj_matrix[i][s].isld);
-        // }
-        // if (adj_matrix[i][s].dist != NULL) {
-            // free(result_matrix[i][s].dist);
-            // result_matrix[i][s].dist = mx_strdup(adj_matrix[i][s].dist);
-        // }
-    // }
-// }
+void mx_copy_col
+(t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
+    for (int i = 0; i < msize; i++) {
+        if (adj_matrix[i][s].isld != NULL) {
+            free(result_matrix[i][s].isld);
+            result_matrix[i][s].isld = mx_strdup(adj_matrix[i][s].isld);
+        }
+        if (adj_matrix[i][s].dist != NULL) {
+            free(result_matrix[i][s].dist);
+            result_matrix[i][s].dist = mx_strdup(adj_matrix[i][s].dist);
+        }
+    }
+}
 
 void mx_copy_row
 (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
@@ -84,7 +84,7 @@ void mx_add_island(t_unit *result_matrix, char *island) {
     char *temp = result_matrix->isld;
 
     if (result_matrix->isld != NULL)
-        arrow = mx_strjoin(" -> ", result_matrix->isld);
+        arrow = mx_strjoin(result_matrix->isld, " -> ");
     result_matrix->isld = mx_strjoin(island, arrow);
     free(temp);
     free(arrow);
@@ -127,28 +127,22 @@ t_unit *adj_matrix_j) {
 }
 
 void mx_floyd_formula(
-t_unit *result_matrix, t_unit *adj_matrix_j,
-t_unit *adj_matrix_i, char *island) {
-    if (adj_matrix_i->dist == NULL || adj_matrix_j->dist == NULL) {
-        // printf("floyd_formula 0IF\n");
-        return;
-    }
-    if (result_matrix->isld == NULL && result_matrix->dist == NULL) {
+t_unit *result_matrix, t_unit *adj_matrix_i,
+t_unit *adj_matrix_j, char *island) {
+    // if (adj_matrix_i->dist == NULL || adj_matrix_j->dist == NULL) {
         // printf("floyd_formula 1IF\n");
-        // printf("res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
-        // printf("res->isld %s, adj_i %s adj_j %s\n", result_matrix->isld, adj_matrix_i->isld, adj_matrix_j->isld);
+        // return;
+    // }
+    if (result_matrix->isld == NULL && result_matrix->dist == NULL) {
+        printf("floyd_formula 1IF\n");
+        printf("res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
         // printf("floyd_formula 2IF\n");
         // printf("floyd_formula res->dist:%s\n", result_matrix->dist);
         // printf("floyd_formula adj->dist:%s\n", adj_matrix_i->dist);
         // printf("floyd_formula adj->dist:%s\n", adj_matrix_j->dist);
         mx_add_distance(result_matrix, adj_matrix_i->dist);
         mx_add_distance(result_matrix, adj_matrix_j->dist);
-        if (adj_matrix_i->isld != NULL)
-            mx_add_island(result_matrix, adj_matrix_i->isld);
         mx_add_island(result_matrix, island);
-        if (adj_matrix_j->isld != NULL)
-            mx_add_island(result_matrix, adj_matrix_j->isld);
-        // printf("after%s\n", result_matrix->isld);
     }
     else {
         // printf("floyd_formuld else res->dis = %s\nadj_i-dest = %s\nadj_j = %s\n",
@@ -162,20 +156,18 @@ t_unit *adj_matrix_i, char *island) {
             // // mx_push_back_t_unit(&result_matrix->parl, 
         // }
         else if (mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) > 0) {
-            // printf("cmp_res = %d\n", cmp_res);
-        // printf("!!res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
-        // printf("!!res->isld %s, adj_i %s adj_j %s\n", result_matrix->isld, adj_matrix_i->isld, adj_matrix_j->isld);
-        // printf("step %s\n", island);
-            // printf("floyd_formula ELSEIF\n");
+            printf("cmp_res = %d\n", cmp_res);
+            printf("res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
+            printf("floyd_formula ELSEIF\n");
             mx_strdel(&result_matrix->dist);
             mx_strdel(&result_matrix->isld);
+            // result_matrix->dist = (char*)malloc(sizeof(char*));
+            // result_matrix->isld = (char*)malloc(sizeof(char*));
             mx_add_distance(result_matrix, adj_matrix_i->dist);
             mx_add_distance(result_matrix, adj_matrix_j->dist);
-            if (adj_matrix_i->isld != NULL)
-                mx_add_island(result_matrix, adj_matrix_i->isld);
             mx_add_island(result_matrix, island);
-            if (adj_matrix_j->isld != NULL)
-                mx_add_island(result_matrix, adj_matrix_j->isld);
+            // mx_add_island(result_matrix, adj_matrix_i->isld);
+            // mx_add_island(result_matrix, adj_matrix_i->isld);
         }
         // mx_add_island(result_matrix, island);
     }
@@ -192,10 +184,22 @@ void mx_floyd(t_unit **adj_matrix, t_unit **result_matrix, int msize) {
     int step = 0;
     int curr = 1;   
 
-    while (step++ < msize - 1) {
+    while (step++ < msize) {
         curr = (curr == 1) ? 0 : 1;
-        if (curr == 1)
+        if (curr == 1) {
             mx_swap_ptr_matrix(&adj_matrix, &result_matrix);
+            printf("matrix swaped\n");
+        }
+        // printf("before forfor res_mat:\n");
+        // mx_print_matrix(result_matrix, msize);
+        // printf("adj_mat:\n");
+        // mx_print_matrix(adj_matrix, msize);
+        // printf("\n");
+        // mx_copy_static_col_row(adj_matrix, result_matrix, msize, step);
+        // mx_print_matrix(result_matrix, msize);
+        // printf("\n");
+        // mx_print_matrix(adj_matrix, msize);
+        // printf("\n");
         for (int i = 1; i < msize; i++) {
             for (int k = 1; k < msize; k++)
                 mx_copy_row(adj_matrix, result_matrix, msize, k); 
@@ -216,20 +220,32 @@ void mx_floyd(t_unit **adj_matrix, t_unit **result_matrix, int msize) {
                     // mx_copy_t_unit(&result_matrix[i][j], &adj_matrix[i][j]);
                     // continue;
                 // }
-        // printf("res->dest %s, adj_i %s adj_j %s\n",
-        // result_matrix[i][j].dist, adj_matrix[i][step].dist, adj_matrix[step][j].dist);
-
-                mx_floyd_formula(&result_matrix[i][j], &adj_matrix[i][step],
-                &adj_matrix[step][j], adj_matrix[0][step].isld);
-            }
-        }
-        // printf("result_matrix:\n");
+                // printf("floyd\n");
+                // mx_print_matrix(result_matrix, msize);
+                // printf("adj_matrix:\n");
+                // mx_print_matrix(adj_matrix, msize);
+                // printf("i = %d j = %d\n", i, j);
+                // printf("result_matrix disr = %s, adj_matrix_i = %s, adj_matrix_j = %s\n)",
+                // result_matrix[i][j].dist, adj_matrix[i][step].dist,
+                // adj_matrix[step][j].dist);
+        // printf("in cycle result_matrix:\n");
         // mx_print_matrix(result_matrix, msize);
         // printf("\n");
         // mx_print_matrix(adj_matrix, msize);
-        // printf("end for for step = %s\n", adj_matrix[0][step].isld);
-        // if (step == 3)
-            // break;
+        // printf("\n");
+        printf("res->dest %s, adj_i %s adj_j %s\n",
+        result_matrix[i][j].dist, &adj_matrix[i][step].dist, adj_matrix[step][j].dist);
+                mx_floyd_formula(&result_matrix[i][j], &adj_matrix[i][step],
+                adj_matrix[step][j], adj_matrix[0][step].isld);
+            }
+        }
+        printf("result_matrix:\n");
+        mx_print_matrix(result_matrix, msize);
+        printf("\n");
+        mx_print_matrix(adj_matrix, msize);
+        printf("end for for step = %s\n", adj_matrix[0][step].isld);
+        if (step == 1)
+            break;
     }
 }
 // strcpm(&result_matrix.isld[i], " -> \0");
@@ -250,7 +266,6 @@ int main(int argc, char **argv) {
     printf("adj_matrix:\n");
     mx_print_matrix(adj_matrix, msize);
     printf("\n");
-    mx_print_result(result_matrix, msize);
     mx_unit_free(adj_matrix, msize);
     mx_unit_free(result_matrix, msize);
 }
