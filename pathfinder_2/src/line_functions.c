@@ -22,12 +22,13 @@ int mx_argv_argc_handler(int argc, char **argv, int *fd) {
         mx_error_handler(FILE_DOES_NOT_EXISTS, argv[1], NULL);                 
         exit(-1);                                                              
     }                                                                          
-    if (mx_read_line(&lineptr, 10, '\n', *fd) == -1) {                         
+    if (mx_read_line(&lineptr, 2, '\n', *fd) == -1) {                         
         mx_error_handler(FILE_IS_EMPTY, argv[1], NULL);                        
         exit(-1);                                                              
     }                                                                          
     mx_check_first_line(lineptr);                                                 
     result = mx_atoi(lineptr);
     mx_strdel(&lineptr);
+    close(*fd);
     return result;                                                   
 }                   

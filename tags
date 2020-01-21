@@ -4,77 +4,71 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AP_NAME	pathfinder/Makefile	/^AP_NAME = pathfinder$/;"	m
-CFLAGS	libmx/Makefile	/^CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic$/;"	m
-CFLAGS	pathfinder/Makefile	/^CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic$/;"	m
-FILE_DOES_NOT_EXISTS	pathfinder/inc/pathfinder.h	/^    FILE_DOES_NOT_EXISTS,$/;"	e	enum:e_error
+CFLAGS	libmx/old/Makefile	/^CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic$/;"	m
+CFLG	libmx/Makefile	/^CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic)$/;"	m
 FILE_DOES_NOT_EXISTS	pathfinder_2/inc/pathfinder.h	/^    FILE_DOES_NOT_EXISTS,                                                      $/;"	e	enum:e_error
-FILE_IS_EMPTY	pathfinder/inc/pathfinder.h	/^    FILE_IS_EMPTY,$/;"	e	enum:e_error
 FILE_IS_EMPTY	pathfinder_2/inc/pathfinder.h	/^    FILE_IS_EMPTY,                                                             $/;"	e	enum:e_error
-INCF	libmx/Makefile	/^INCF = inc$/;"	m
-INCF	pathfinder/Makefile	/^INCF =  inc\/$/;"	m
-INVALID_ARGUMENTS_COUNT	pathfinder/inc/pathfinder.h	/^    INVALID_ARGUMENTS_COUNT,$/;"	e	enum:e_error
+INC	libmx/Makefile	/^INC		=	libmx.h$/;"	m
+INCD	libmx/Makefile	/^INCD	=	inc$/;"	m
+INCF	libmx/old/Makefile	/^INCF = inc$/;"	m
+INCS	libmx/Makefile	/^INCS	=	$(addprefix $(INCD)\/, $(INC))$/;"	m
 INVALID_ARGUMENTS_COUNT	pathfinder_2/inc/pathfinder.h	/^    INVALID_ARGUMENTS_COUNT,                                                   $/;"	e	enum:e_error
-INVALID_FIRST_LINE	pathfinder/inc/pathfinder.h	/^    INVALID_FIRST_LINE,$/;"	e	enum:e_error
 INVALID_FIRST_LINE	pathfinder_2/inc/pathfinder.h	/^    INVALID_FIRST_LINE,                                                        $/;"	e	enum:e_error
-INVALID_ISLANDS_COUNT	pathfinder/inc/pathfinder.h	/^    INVALID_ISLANDS_COUNT$/;"	e	enum:e_error
 INVALID_ISLANDS_COUNT	pathfinder_2/inc/pathfinder.h	/^    INVALID_ISLANDS_COUNT                                                      $/;"	e	enum:e_error
-INVALID_LINE	pathfinder/inc/pathfinder.h	/^    INVALID_LINE,$/;"	e	enum:e_error
 INVALID_LINE	pathfinder_2/inc/pathfinder.h	/^    INVALID_LINE,                                                              $/;"	e	enum:e_error
-LIBMXF	pathfinder/Makefile	/^LIBMXF = ..\/libmx\/inc$/;"	m
 LIBMX_H_	libmx/inc/libmx.h	2;"	d
-LIB_NAME	libmx/Makefile	/^LIB_NAME = libmx.a$/;"	m
-LIB_NAME	pathfinder/Makefile	/^LIB_NAME = libmx.a$/;"	m
-OBJ	libmx/Makefile	/^OBJ = \\$/;"	m
-OBJ	pathfinder/Makefile	/^OBJ = \\$/;"	m
-PATHFINDER_H	pathfinder/inc/pathfinder.h	2;"	d
+LIB_NAME	libmx/old/Makefile	/^LIB_NAME = libmx.a$/;"	m
+NAME	libmx/Makefile	/^NAME	=	libmx.a$/;"	m
+OBJ	libmx/old/Makefile	/^OBJ = \\$/;"	m
+OBJD	libmx/Makefile	/^OBJD	=	obj$/;"	m
+OBJS	libmx/Makefile	/^OBJS	=	$(addprefix $(OBJD)\/, $(SRC:%.c=%.o))$/;"	m
 PATHFINDER_H	pathfinder_2/inc/pathfinder.h	2;"	d
-SRCF	libmx/Makefile	/^SRCF = \\$/;"	m
-SRCF	pathfinder/Makefile	/^SRCF = \\$/;"	m
-argv_argc_handler	pathfinder/src/main.c	/^static int argv_argc_handler(int argc, char **argv, int *fd) {$/;"	f	file:
-arr_malloc	pathfinder/src/main.c	/^static void arr_malloc(char ***adj_matrix, int island_count) {$/;"	f	file:
+SRC	libmx/Makefile	/^SRC	= 	mx_abs.c\\$/;"	m
+SRCD	libmx/Makefile	/^SRCD	=	src$/;"	m
+SRCF	libmx/old/Makefile	/^SRCF = \\$/;"	m
+SRCS	libmx/Makefile	/^SRCS	=	$(addprefix $(SRCD)\/, $(SRC))$/;"	m
 check_and_read	libmx/src/mx_read_line.c	/^static int check_and_read(char **fd_arr, int fd,$/;"	f	file:
-check_first_line	pathfinder/src/main.c	/^static void check_first_line(char *line) {$/;"	f	file:
-check_if_valid_line	pathfinder/src/main.c	/^static void check_if_valid_line(char *line, int line_number) {$/;"	f	file:
 costil	libmx/src/mx_read_line.c	/^static void costil(char **lineptr) {$/;"	f	file:
 costil_2	libmx/src/mx_read_line.c	/^static int costil_2(char *fd_arr, char **lineptr, int result) {$/;"	f	file:
 data	libmx/inc/libmx.h	/^    void *data;$/;"	m	struct:s_list
 data	libmx/test.c	/^    void *data;$/;"	m	struct:s_list	file:
 dist	pathfinder_2/inc/pathfinder.h	/^    char *dist;$/;"	m	struct:s_unit
-e_error	pathfinder/inc/pathfinder.h	/^typedef enum e_error {$/;"	g
 e_error	pathfinder_2/inc/pathfinder.h	/^typedef enum e_error {                                                         $/;"	g
-fill_matrix	pathfinder/src/main.c	/^static void fill_matrix(char ***adj_matrix, int island_count, int fd) {$/;"	f	file:
 fill_result	libmx/src/mx_read_line.c	/^static void fill_result(int *result, char **str, char delim) {$/;"	f	file:
-is_uniq_island	pathfinder/src/main.c	/^static void is_uniq_island$/;"	f	file:
-isl	test/main.c	/^    char *isl;$/;"	m	struct:str	file:
+free_t_unit_list	pathfinder_2/src/memory_function.c	/^static void free_t_unit_list(t_unit* head) {$/;"	f	file:
 isld	pathfinder_2/inc/pathfinder.h	/^    char *isld;$/;"	m	struct:s_unit
 large	libmx/src/mx_print_unicode.c	/^static void large(int c) {$/;"	f	file:
-loop_nut_null	pathfinder/src/main.c	/^static void loop_nut_null(char ***adj_matrix, int island_count) {$/;"	f	file:
 main	libmx/fortest.c	/^int main(void) {$/;"	f
 main	libmx/test.c	/^int main(void) {$/;"	f
-main	pathfinder/src/main.c	/^int main(int argc, char **argv) {$/;"	f
 main	pathfinder_2/src/main.c	/^int main(int argc, char **argv) {$/;"	f
 main	test/main.c	/^int main() {$/;"	f
 mx_abs	libmx/src/mx_abs.c	/^unsigned int mx_abs(int num) {$/;"	f
+mx_add_distance	pathfinder_2/src/main.c	/^void mx_add_distance(t_unit *result_matrix, char *distance) {$/;"	f
+mx_add_island	pathfinder_2/src/main.c	/^void mx_add_island(t_unit *result_matrix, char *island) {$/;"	f
 mx_argv_argc_handler	pathfinder_2/src/line_functions.c	/^int mx_argv_argc_handler(int argc, char **argv, int *fd) {                 $/;"	f
 mx_atoi	libmx/src/mx_atoi.c	/^int mx_atoi(const char *str) {$/;"	f
 mx_binary_search	libmx/src/mx_binary_search.c	/^int mx_binary_search(char** arr, int size, const char *s, int *count) {$/;"	f
 mx_bubble_sort	libmx/src/mx_bubble_sort.c	/^int mx_bubble_sort(char **arr, int size) {$/;"	f
 mx_check_first_line	pathfinder_2/src/line_functions.c	/^void mx_check_first_line(char *line) {$/;"	f
 mx_check_if_valid_line	pathfinder_2/src/errors.c	/^void mx_check_if_valid_line(char *line, int line_number) {$/;"	f
+mx_copy_row	pathfinder_2/src/main.c	/^void mx_copy_row$/;"	f
+mx_copy_t_unit	pathfinder_2/src/main.c	/^void mx_copy_t_unit(t_unit *result_matrix, t_unit *adj_matrix) {$/;"	f
+mx_count_dist	pathfinder_2/src/main.c	/^int mx_count_dist(char *dist) {$/;"	f
 mx_count_substr	libmx/src/mx_count_substr.c	/^int mx_count_substr(const char *str, const char *sub) {$/;"	f
 mx_count_words	libmx/src/mx_count_words.c	/^int mx_count_words(const char *str, char delimiter) {$/;"	f
 mx_create_node	libmx/src/mx_create_node.c	/^t_list *mx_create_node(void *data) {$/;"	f
 mx_del_extra_spaces	libmx/src/mx_del_extra_spaces.c	/^char *mx_del_extra_spaces(const char *str) {$/;"	f
-mx_del_matrix	pathfinder/src/mx_del_matrix.c	/^void mx_del_matrix(char ***matrix, int size) {$/;"	f
 mx_del_strarr	libmx/src/mx_del_strarr.c	/^void mx_del_strarr(char ***arr) {$/;"	f
-mx_error_handler	pathfinder/src/mx_error_handler.c	/^void mx_error_handler(t_error error, char *filename, char *text) {$/;"	f
 mx_error_handler	pathfinder_2/src/errors.c	/^void mx_error_handler(t_error error, char *filename, char *text) {$/;"	f
 mx_error_handler	pathfinder_2/src/old/mx_error_handler.c	/^void mx_error_handler(t_error error, char *filename, char *text) {$/;"	f
 mx_file_to_str	libmx/src/mx_file_to_str.c	/^char *mx_file_to_str(const char *file) {$/;"	f
-mx_fill_matrix	pathfinder_2/src/fill_matrix.c	/^void mx_fill_matrix(t_unit **adj_matrix, int island_count, int fd) {$/;"	f
+mx_fill_matrix	pathfinder_2/src/fill_matrix.c	/^int mx_fill_matrix(t_unit **adj_matrix, int island_count, char *file_name) {$/;"	f
+mx_floyd	pathfinder_2/src/main.c	/^void mx_floyd(t_unit **adj_matrix, t_unit **result_matrix, int msize) {$/;"	f
+mx_floyd_cmp	pathfinder_2/src/main.c	/^int mx_floyd_cmp(t_unit *result_matrix, t_unit *adj_matrix_i,$/;"	f
+mx_floyd_formula	pathfinder_2/src/main.c	/^void mx_floyd_formula($/;"	f
 mx_foreach	libmx/src/mx_foreach.c	/^void mx_foreach(const int *arr, int size, void (*f)(int)) {$/;"	f
 mx_get_char_index	libmx/src/mx_get_char_index.c	/^int mx_get_char_index(const char* str, char c) {$/;"	f
+mx_get_file_length	libmx/src/mx_get_file_length.c	/^int mx_get_file_length(const char *file) {$/;"	f
 mx_get_substr_index	libmx/src/mx_get_substr_index.c	/^int mx_get_substr_index(const char *str, const char *sub) {$/;"	f
 mx_iarr_rotate	libmx/src/mx_iarr_rotate.c	/^void mx_iarr_rotate(int *arr, int size, int shift) {$/;"	f
 mx_is_uniq_island	pathfinder_2/src/fill_matrix.c	/^int  mx_is_uniq_island$/;"	f
@@ -92,22 +86,24 @@ mx_memmem	libmx/src/mx_memmem.c	/^void *mx_memmem(const void *big, size_t big_le
 mx_memmove	libmx/src/mx_memmove.c	/^void *mx_memmove(void *dst, const void *src, size_t len) {$/;"	f
 mx_memrchr	libmx/src/mx_memrchr.c	/^void *mx_memrchr(const void *s, int c, size_t n) {$/;"	f
 mx_memset	libmx/src/mx_memset.c	/^ void *mx_memset(void *b, int c, size_t len) {$/;"	f
-mx_parse_line	pathfinder_2/src/fill_matrix.c	/^void mx_parse_line(t_unit **adj_matrix, char *line, int island_count) {$/;"	f
+mx_parse_line	pathfinder_2/src/fill_matrix.c	/^int mx_parse_line(t_unit **adj_matrix, char *line, int island_count) {$/;"	f
 mx_pop_back	libmx/src/mx_pop_back.c	/^void mx_pop_back(t_list **head) {$/;"	f
 mx_pop_front	libmx/src/mx_pop_front.c	/^void mx_pop_front(t_list **head) {$/;"	f
 mx_pow	libmx/src/mx_pow.c	/^double mx_pow(double n, unsigned int pow) {$/;"	f
+mx_prepare_result_matrix	pathfinder_2/src/main.c	/^void mx_prepare_result_matrix$/;"	f
 mx_print_error	libmx/src/mx_print_error.c	/^void mx_print_error(const char *error) {$/;"	f
 mx_print_matrix	pathfinder_2/src/print_funtions.c	/^void mx_print_matrix(t_unit **adj_matrix, int msize) {$/;"	f
+mx_print_result	pathfinder_2/src/print_funtions.c	/^void mx_print_result(t_unit **result_matrix, int msize) {$/;"	f
 mx_print_strarr	libmx/src/mx_print_strarr.c	/^void  mx_print_strarr(char **arr, const char *delim) {$/;"	f
 mx_print_unicode	libmx/src/mx_print_unicode.c	/^void mx_print_unicode(wchar_t c) {$/;"	f
 mx_printchar	libmx/src/mx_printchar.c	/^void mx_printchar(char c) {$/;"	f
 mx_printint	libmx/src/mx_printint.c	/^void mx_printint(int n) {$/;"	f
 mx_printstr	libmx/src/mx_printstr.c	/^void mx_printstr(const char *s) {$/;"	f
 mx_push_back	libmx/src/mx_push_back.c	/^void mx_push_back(t_list **list, void *data) {$/;"	f
+mx_push_back_t_unit	pathfinder_2/src/memory_function.c	/^void mx_push_back_t_unit$/;"	f
 mx_push_front	libmx/src/mx_push_front.c	/^void mx_push_front(t_list **list, void *data)$/;"	f
 mx_read_line	libmx/src/mx_read_line.c	/^int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {$/;"	f
 mx_replace_substr	libmx/src/mx_replace_substr.c	/^char *mx_replace_substr(const char *str, const char *sub,const char *replace) {$/;"	f
-mx_set_arr_null	pathfinder/src/mx_str_set_arr_null.c	/^void mx_set_arr_null(int size_row, int size_col,$/;"	f
 mx_set_distance	pathfinder_2/src/fill_matrix.c	/^void mx_set_distance$/;"	f
 mx_shift_str	libmx/src/mx_shift_str.c	/^void mx_shift_str(char *str, int shift) {$/;"	f
 mx_sort_list	libmx/src/mx_sort_list.c	/^t_list *mx_sort_list(t_list *lst, bool (*cmp)(void *, void *)) {$/;"	f
@@ -121,10 +117,8 @@ mx_strcpy	libmx/src/mx_strcpy.c	/^char *mx_strcpy(char *dst, const char *src) {$
 mx_strcpy_until_char	libmx/src/mx_strcpy_until_char.c	/^char *mx_strcpy_until_char(char *dst, const char *src, char delim) {$/;"	f
 mx_strdel	libmx/src/mx_strdel.c	/^void mx_strdel(char **str) {$/;"	f
 mx_strdup	libmx/src/mx_strdup.c	/^char *mx_strdup(const char *str) {$/;"	f
-mx_strdup_del	pathfinder/src/mx_strdup_del.c	/^char *mx_strdup_del(char *str) {$/;"	f
 mx_strdup_until_char	libmx/src/mx_strdup_until_char.c	/^char *mx_strdup_until_char(const char *s1, char  delim) {$/;"	f
 mx_strjoin	libmx/src/mx_strjoin.c	/^char *mx_strjoin(const char *s1, const char *s2) {$/;"	f
-mx_strjoin_del	pathfinder/src/mx_strjoin_del.c	/^char *mx_strjoin_del(char *s1, const char *s2) {$/;"	f
 mx_strjoin_until_char	libmx/src/mx_strjoin_until_char.c	/^char *mx_strjoin_until_char(char **s1, const char *s2, char delim) {$/;"	f
 mx_strlen	libmx/src/mx_strlen.c	/^int mx_strlen(const char *s) {$/;"	f
 mx_strncpy	libmx/src/mx_strncpy.c	/^char *mx_strncpy(char *dst, const char *src, int len) {$/;"	f
@@ -136,7 +130,7 @@ mx_strstr	libmx/src/mx_strstr.c	/^char *mx_strstr(const char *haystack, const ch
 mx_strtrim	libmx/src/mx_strtrim.c	/^char *mx_strtrim(const char *str) {$/;"	f
 mx_strtrim_char	libmx/src/mx_strtrim_char.c	/^char *mx_strtrim_char(const char *str, char c) {$/;"	f
 mx_swap_char	libmx/src/mx_swap_char.c	/^void mx_swap_char(char *s1, char *s2) {$/;"	f
-mx_three_to_one	pathfinder/src/mx_three_to_one.c	/^void mx_three_to_one(char *first_part, char *text, char *second_part) {$/;"	f
+mx_swap_ptr_matrix	pathfinder_2/src/main.c	/^void mx_swap_ptr_matrix(t_unit ***adj_matrix, t_unit ***result_matrix) {$/;"	f
 mx_three_to_one	pathfinder_2/src/errors.c	/^void mx_three_to_one(char *first_part, char *text, char *second_part) {$/;"	f
 mx_three_to_one	pathfinder_2/src/old/mx_three_to_one.c	/^void mx_three_to_one(char *first_part, char *text, char *second_part) {$/;"	f
 mx_unit_free	pathfinder_2/src/memory_function.c	/^void mx_unit_free(t_unit **matrix, int island_count) {$/;"	f
@@ -144,22 +138,13 @@ mx_unit_malloc	pathfinder_2/src/memory_function.c	/^void mx_unit_malloc(t_unit *
 next	libmx/inc/libmx.h	/^    struct s_list *next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
 next	libmx/test.c	/^    struct s_list *next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list	file:
 not_large_but_not_small	libmx/src/mx_print_unicode.c	/^static void not_large_but_not_small(int c) {$/;"	f	file:
-parse_line	pathfinder/src/main.c	/^static void parse_line(char ***adj_matrix, char *line, int island_count) {$/;"	f	file:
-prepare_result_matrix	pathfinder/src/main.c	/^static void prepare_result_matrix$/;"	f	file:
+parl	pathfinder_2/inc/pathfinder.h	/^    struct s_unit *parl;$/;"	m	struct:s_unit	typeref:struct:s_unit::s_unit
 print	libmx/src/mx_print_unicode.c	/^static void print(int b1, int b2, int b3, int b4) {$/;"	f	file:
-print_matrix	pathfinder/src/main.c	/^static void print_matrix(char ***adj_matrix, int island_count) {$/;"	f	file:
+print_list	pathfinder_2/src/print_funtions.c	/^void print_list(t_unit result_matrix, char *from, char *to) {$/;"	f
 s_list	libmx/inc/libmx.h	/^typedef struct s_list {$/;"	s
 s_list	libmx/test.c	/^typedef struct s_list {$/;"	s	file:
 s_unit	pathfinder_2/inc/pathfinder.h	/^typedef struct s_unit {$/;"	s
-set_distance	pathfinder/src/main.c	/^static void set_distance$/;"	f	file:
-str	pathfinder/src/main.c	/^    char *str;$/;"	m	struct:str	file:
-str	pathfinder/src/main.c	/^typedef struct str {$/;"	s	file:
-str	pathfinder/src/main.c	/^} str;$/;"	t	typeref:struct:str	file:
-str	test/main.c	/^    char *str;$/;"	m	struct:str	file:
-str	test/main.c	/^typedef struct str {$/;"	s	file:
-str	test/main.c	/^} str;$/;"	t	typeref:struct:str	file:
 swap	libmx/src/mx_sort_list.c	/^static void swap(void **s1, void **s2) {$/;"	f	file:
-t_error	pathfinder/inc/pathfinder.h	/^} t_error;$/;"	t	typeref:enum:e_error
 t_error	pathfinder_2/inc/pathfinder.h	/^} t_error;                                                                     $/;"	t	typeref:enum:e_error
 t_list	libmx/inc/libmx.h	/^}   t_list;$/;"	t	typeref:struct:s_list
 t_list	libmx/test.c	/^}   t_list;$/;"	t	typeref:struct:s_list	file:

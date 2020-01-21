@@ -8,30 +8,6 @@ void mx_prepare_result_matrix
         result_matrix[0][i].isld = mx_strdup(adj_matrix[0][i].isld);
 }
 
-// void mx_copy_static_col_row
-// (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
-    // for (int i = 0; i < msize; i++) {
-        // if (adj_matrix[i][s].isld != NULL) {
-            // free(result_matrix[i][s].isld);
-            // result_matrix[i][s].isld = mx_strdup(adj_matrix[i][s].isld);
-        // }
-        // if (adj_matrix[i][s].dist != NULL) {
-            // free(result_matrix[i][s].dist);
-            // result_matrix[i][s].dist = mx_strdup(adj_matrix[i][s].dist);
-        // }
-    // }
-    // for (int i = 0; i < msize; i++) {
-        // if (adj_matrix[s][i].isld != NULL) {
-            // free(result_matrix[s][i].isld);
-            // result_matrix[s][i].isld = mx_strdup(adj_matrix[s][i].isld);
-        // }
-        // if (adj_matrix[s][i].dist != NULL) {
-            // free(result_matrix[s][i].dist);
-            // result_matrix[s][i].dist = mx_strdup(adj_matrix[s][i].dist);
-        // }
-    // }
-// }
-
 // void mx_copy_col
 // (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
     // for (int i = 0; i < msize; i++) {
@@ -46,6 +22,7 @@ void mx_prepare_result_matrix
     // }
 // }
 
+
 void mx_copy_row
 (t_unit **adj_matrix, t_unit **result_matrix, int msize, int s) {
     for (int i = 0; i < msize; i++) {
@@ -57,16 +34,11 @@ void mx_copy_row
             free(result_matrix[s][i].dist);
             result_matrix[s][i].dist = mx_strdup(adj_matrix[s][i].dist);
         }
+        if (adj_matrix[s][i].parl != NULL) {
+            result_matrix[s][i].parl = adj_matrix[s][i].parl;
+        }
     }
 }
-
-// bool mx_is_direct(char *str) {
-    // for (int i = 0; str[i] != '\0'; i++) {
-        // if (str[i] == '+' || str[i] == '-')
-            // return false;
-    // }
-    // return true;
-// }
 
 void mx_add_distance(t_unit *result_matrix, char *distance) {
     char *plus = NULL;
@@ -128,56 +100,42 @@ t_unit *adj_matrix_j) {
 
 void mx_floyd_formula(
 t_unit *result_matrix, t_unit *adj_matrix_j,
-t_unit *adj_matrix_i, char *island) {
+t_unit *adj_matrix_i, t_unit *step) {
     if (adj_matrix_i->dist == NULL || adj_matrix_j->dist == NULL) {
-        // printf("floyd_formula 0IF\n");
         return;
     }
     if (result_matrix->isld == NULL && result_matrix->dist == NULL) {
-        // printf("floyd_formula 1IF\n");
-        // printf("res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
-        // printf("res->isld %s, adj_i %s adj_j %s\n", result_matrix->isld, adj_matrix_i->isld, adj_matrix_j->isld);
-        // printf("floyd_formula 2IF\n");
-        // printf("floyd_formula res->dist:%s\n", result_matrix->dist);
-        // printf("floyd_formula adj->dist:%s\n", adj_matrix_i->dist);
-        // printf("floyd_formula adj->dist:%s\n", adj_matrix_j->dist);
         mx_add_distance(result_matrix, adj_matrix_i->dist);
         mx_add_distance(result_matrix, adj_matrix_j->dist);
         if (adj_matrix_i->isld != NULL)
             mx_add_island(result_matrix, adj_matrix_i->isld);
-        mx_add_island(result_matrix, island);
+        mx_add_island(result_matrix, step->isld);
         if (adj_matrix_j->isld != NULL)
             mx_add_island(result_matrix, adj_matrix_j->isld);
-        // printf("after%s\n", result_matrix->isld);
+        // printf("result_matrix->isld == NULL && result_matrix->dist == NULL\n");
     }
     else {
-        // printf("floyd_formuld else res->dis = %s\nadj_i-dest = %s\nadj_j = %s\n",
-        int cmp_res = mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j);
-        // result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
-        if (cmp_res < 0) {
+        if (mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) < 0) {
+            // printf("mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) < 0\n");
             return;
         }
-        // if (mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) == 0) {
-            // continue;
-            // // mx_push_back_t_unit(&result_matrix->parl, 
-        // }
         else if (mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) > 0) {
-            // printf("cmp_res = %d\n", cmp_res);
-        // printf("!!res->dest %s, adj_i %s adj_j %s\n", result_matrix->dist, adj_matrix_i->dist, adj_matrix_j->dist);
-        // printf("!!res->isld %s, adj_i %s adj_j %s\n", result_matrix->isld, adj_matrix_i->isld, adj_matrix_j->isld);
-        // printf("step %s\n", island);
-            // printf("floyd_formula ELSEIF\n");
+            // printf("mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) > 0\n");
             mx_strdel(&result_matrix->dist);
             mx_strdel(&result_matrix->isld);
             mx_add_distance(result_matrix, adj_matrix_i->dist);
             mx_add_distance(result_matrix, adj_matrix_j->dist);
             if (adj_matrix_i->isld != NULL)
                 mx_add_island(result_matrix, adj_matrix_i->isld);
-            mx_add_island(result_matrix, island);
+            mx_add_island(result_matrix, step->isld);
             if (adj_matrix_j->isld != NULL)
                 mx_add_island(result_matrix, adj_matrix_j->isld);
         }
-        // mx_add_island(result_matrix, island);
+        else {
+            // printf("mx_floyd_cmp(result_matrix, adj_matrix_i, adj_matrix_j) == 0\n");
+            mx_push_back_t_unit(result_matrix,
+            adj_matrix_j, adj_matrix_i, step->isld); 
+        }
     }
 }
 
@@ -188,51 +146,59 @@ void mx_swap_ptr_matrix(t_unit ***adj_matrix, t_unit ***result_matrix) {
     *result_matrix = buff;
 }
 
+// void mx_go_list(t_unit **result_matrix, t_unit **temp_i, t_unit **temp_j,
 void mx_floyd(t_unit **adj_matrix, t_unit **result_matrix, int msize) {
     int step = 0;
-    int curr = 1;   
+    t_unit *temp_i;
+    t_unit *temp_j;
 
     while (step++ < msize - 1) {
-        curr = (curr == 1) ? 0 : 1;
-        if (curr == 1)
-            mx_swap_ptr_matrix(&adj_matrix, &result_matrix);
+        for (int k = 1; k < msize; k++)
+            mx_copy_row(adj_matrix, result_matrix, msize, k); 
         for (int i = 1; i < msize; i++) {
-            for (int k = 1; k < msize; k++)
-                mx_copy_row(adj_matrix, result_matrix, msize, k); 
-            // mx_print_matrix(result_matrix, msize);
             for (int j = 1; j < msize; j++) {
-                if (i == j)
+                if (i == step || j == step || i == j)
                     continue;
-                if (i == step || j == step) {
-                    // if (adj_matrix[i][step].dist == NULL && i != step) {
-                        // mx_copy_row(adj_matrix, result_matrix, msize, i);
-                    // }
-                    // else if (adj_matrix[step][j].dist == NULL && j != step) {
-                        // mx_copy_col(adj_matrix, result_matrix, msize, j);
-                    // }
-                    continue;
+                if (adj_matrix[i][step].parl != NULL && adj_matrix[step][j].parl != NULL) {
+                    temp_i = &adj_matrix[i][step];
+                    while(temp_i != NULL) {
+                        temp_j = &adj_matrix[step][j];
+                        while (temp_j != NULL) {
+                            mx_floyd_formula(&result_matrix[i][j], temp_i,
+                            temp_j, &adj_matrix[0][step]);
+                            temp_j = temp_j->parl;
+                        }
+                        temp_i = temp_i->parl;
+                    }
                 }
-                // if (adj_matrix[i][step].dist == NULL || adj_matrix[step][j].dist == NULL) {
-                    // mx_copy_t_unit(&result_matrix[i][j], &adj_matrix[i][j]);
-                    // continue;
-                // }
-        // printf("res->dest %s, adj_i %s adj_j %s\n",
-        // result_matrix[i][j].dist, adj_matrix[i][step].dist, adj_matrix[step][j].dist);
-
-                mx_floyd_formula(&result_matrix[i][j], &adj_matrix[i][step],
-                &adj_matrix[step][j], adj_matrix[0][step].isld);
+                else if (adj_matrix[i][step].parl != NULL && adj_matrix[step][j].parl == NULL) {
+                    temp_i = &adj_matrix[i][step];
+                    while(temp_i != NULL) {
+                        mx_floyd_formula(&result_matrix[i][j], temp_i, &adj_matrix[step][j],
+                        &adj_matrix[0][step]);
+                        temp_i = temp_i->parl;
+                    }
+                    temp_i = &adj_matrix[i][step];
+                }
+                else if (adj_matrix[i][step].parl == NULL && adj_matrix[step][j].parl != NULL) {
+                    temp_j = &adj_matrix[step][j];
+                    while (temp_j != NULL) {
+                        mx_floyd_formula(&result_matrix[i][j], &adj_matrix[i][step], temp_j,
+                        &adj_matrix[0][step]);
+                        temp_j = temp_j->parl;
+                    }
+                }
+                else {
+                    mx_floyd_formula(&result_matrix[i][j], &adj_matrix[i][step],
+                    &adj_matrix[step][j], &adj_matrix[0][step]);
+                }
             }
         }
-        // printf("result_matrix:\n");
-        // mx_print_matrix(result_matrix, msize);
-        // printf("\n");
-        // mx_print_matrix(adj_matrix, msize);
-        // printf("end for for step = %s\n", adj_matrix[0][step].isld);
-        // if (step == 3)
-            // break;
+        mx_swap_ptr_matrix(&adj_matrix, &result_matrix);
     }
+    if (step % 2 != 0)
+        mx_swap_ptr_matrix(&adj_matrix, &result_matrix);
 }
-// strcpm(&result_matrix.isld[i], " -> \0");
 int main(int argc, char **argv) {
     int fd;                                                                    
     int island_count = mx_argv_argc_handler(argc, argv, &fd); // need to add check if island_count < real_island_count
@@ -242,15 +208,21 @@ int main(int argc, char **argv) {
     t_unit **result_matrix = (t_unit**)malloc(msize * sizeof(t_unit*));
     mx_unit_malloc(adj_matrix, msize);
     mx_unit_malloc(result_matrix, msize);
-    mx_fill_matrix(adj_matrix, island_count, fd);
+    // if (mx_fill_matrix(adj_matrix, island_count, fd) == -1) {
+        // mx_unit_free(adj_matrix, msize);
+        // mx_unit_free(result_matrix, msize);
+        // exit(-1);
+    // }
+    mx_fill_matrix(adj_matrix, island_count, argv[1]);
     mx_prepare_result_matrix(adj_matrix, result_matrix, msize);
     mx_floyd(adj_matrix, result_matrix, msize);
-    printf("FINISH result_matrix:\n");
-    mx_print_matrix(result_matrix, msize);
-    printf("adj_matrix:\n");
-    mx_print_matrix(adj_matrix, msize);
-    printf("\n");
+    // mx_print_parl(result_matrix, msize);
+    // printf("FINISH result_matrix:\n");
+    // mx_print_matrix(result_matrix, msize);
+    // printf("adj_matrix:\n");
+    // mx_print_matrix(adj_matrix, msize);
+    // printf("\n");
     mx_print_result(result_matrix, msize);
-    mx_unit_free(adj_matrix, msize);
     mx_unit_free(result_matrix, msize);
+    mx_unit_free_n_list(adj_matrix, msize);
 }

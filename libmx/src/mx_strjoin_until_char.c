@@ -21,4 +21,3 @@ char *mx_strjoin_until_char(char **s1, const char *s2, char delim) {
     mx_strdel(s1);
     return result;
 }
-
