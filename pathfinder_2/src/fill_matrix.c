@@ -65,30 +65,30 @@ int mx_parse_line(t_unit **adj_matrix, char *line, int island_count) {
     return 0;
 }
 
-int mx_fill_matrix(t_unit **adj_matrix, int island_count, char *file_name) {
+int mx_fill_matrix(t_unit **adj_matrix, int island_count, char **file_str) {
     char *line = NULL;
     int i;
-    char *file_str = mx_file_to_str(file_name); 
 
-    mx_shift_str(file_str, (mx_get_char_index(file_str, '\n') + 1));
-    for (i = 2; mx_get_char_index(file_str, '\n') != -1; i++) { 
-        line = mx_strjoin_until_char(&line, file_str, '\n');
+    mx_shift_str(*file_str, (mx_get_char_index(*file_str, '\n') + 1));
+    for (i = 2; mx_get_char_index(*file_str, '\n') != -1; i++) { 
+        line = mx_strjoin_until_char(&line, *file_str, '\n');
         mx_check_if_valid_line(line, i);
         if (mx_parse_line(adj_matrix, line, island_count) == -1)
            return -1; 
-        mx_shift_str(file_str, (mx_get_char_index(file_str, '\n') + 1));
+        mx_shift_str(*file_str, (mx_get_char_index(*file_str, '\n') + 1));
         mx_strdel(&line);
     } 
-    if (*file_str != '\0') {
+    if (**file_str != '\0') {
         mx_error_handler(INVALID_LINE, NULL, mx_itoa(i));
         exit(-1);
     }
     if (adj_matrix[0][island_count].isld == NULL) {
+        printf("here\n");
         mx_error_handler(INVALID_ISLANDS_COUNT, NULL, NULL);
         exit(-1);
     }
     mx_loop_not_null(adj_matrix, island_count);
-    mx_strdel(&file_str);
+    mx_strdel(file_str);
     return 0;
 }
 

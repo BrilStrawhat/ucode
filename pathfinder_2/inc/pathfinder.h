@@ -24,10 +24,10 @@ typedef struct s_unit {
 // errors function
 void mx_three_to_one(char *first_part, char *text, char *second_part);         
 void mx_error_handler(t_error error, char *filename, char *text);              
-void mx_check_first_line(char *line);
 void mx_check_if_valid_line(char *line, int line_number);
+void mx_check_first_line(char *line, char **lineptr, char **file_str);
 // memory_function
-void mx_unit_malloc(t_unit **matrix, int island_count);
+t_unit **mx_unit_malloc(t_unit **matrix, int island_count);
 void mx_unit_free(t_unit **matrix, int island_count);
 void mx_push_back_t_unit
 (t_unit *result_matrix, t_unit *adj_matrix_j,
@@ -41,7 +41,7 @@ int  mx_is_uniq_island
 void mx_set_distance
 (t_unit **adj_matrix, char *island_i, char *island_j, char *distance);
 int mx_parse_line(t_unit **adj_matrix, char *line, int island_count);
-int mx_fill_matrix(t_unit **adj_matrix, int island_count, char *file_name);
+int mx_fill_matrix(t_unit **adj_matrix, int island_count, char **file_str);
 // print_function
 void mx_print_matrix(t_unit **adj_matrix, int msize);
 void mx_print_result(t_unit **result_matrix, int msize);
@@ -52,5 +52,5 @@ void mx_print_parl(t_unit **result_matrix, int msize);
 int mx_count_dist(char *dist); 
 void mx_add_distance(t_unit *result_matrix, char *distance);
 
-int mx_argv_argc_handler(int argc, char **argv, int *fd);
+int mx_argv_argc_handler(int argc, char **argv, char **file_str);
 #endif      

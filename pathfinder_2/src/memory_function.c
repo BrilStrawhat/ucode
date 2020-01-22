@@ -41,17 +41,18 @@ t_unit *adj_matrix_i, char *island) {
     result_matrix->parl = result;
 }
 
-void mx_unit_malloc(t_unit **matrix, int island_count) {
+t_unit **mx_unit_malloc(t_unit **matrix, int island_count) {
+    matrix = (t_unit**)malloc((island_count + 1) * sizeof(t_unit*));
     for (int i = 0; i < island_count; i++)
         matrix[i] = (t_unit*)malloc(island_count * sizeof(t_unit));
     for (int i = 0; i < island_count; i++) {
         for (int j = 0; j < island_count; j++) {
             matrix[i][j].isld = NULL;
             matrix[i][j].dist = NULL;
-            matrix[i][j].fifo = 0;
             matrix[i][j].parl = NULL;
         }
     }
+    return matrix;
 }
 
 void mx_unit_free(t_unit **matrix, int island_count) {
